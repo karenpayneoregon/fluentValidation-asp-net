@@ -5,6 +5,9 @@ This solution demonstrates how to integrate FluentValidation with an ASP.NET Cor
 
 💡 Code presented has no controller but should be easy to integrate with controllers.
 
+## Article
+
+https://dev.to/karenpayneoregon/aspnet-core-fluentvalidation-16nc
 
 ## NuGet Packages
 
