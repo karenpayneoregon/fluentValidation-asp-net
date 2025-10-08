@@ -1,0 +1,58 @@
+using FluentValidation;
+using Microsoft.EntityFrameworkCore;
+using NotesRazorApp.Classes;
+using NotesRazorApp.Data;
+using NotesRazorApp.Validators;
+using Serilog;
+using Serilog.Events;
+
+using static System.DateTime;
+
+namespace NotesRazorApp;
+
+public class Program
+{
+    public static void Main(string[] args)
+    {
+        var builder = WebApplication.CreateBuilder(args);
+
+        builder.Services.AddRazorPages();
+
+        builder.Services.AddValidatorsFromAssemblyContaining<NoteValidator>();
+
+        builder.Host.UseSerilog((context, configuration) =>
+        {
+
+            configuration.WriteTo.File(Path.Combine(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "LogFiles"), $"{Now.Year}-{Now.Month:D2}-{Now.Day:D2}", "Log.txt"),
+                rollingInterval: RollingInterval.Infinite,
+                outputTemplate: "[{Timestamp:yyyy-MM-dd HH:mm:ss.fff} [{Level}] {Message}{NewLine}{Exception}");
+
+            configuration.MinimumLevel.Information();
+            configuration.MinimumLevel.Override("Microsoft", LogEventLevel.Warning);
+            configuration.MinimumLevel.Override("System", LogEventLevel.Warning);
+
+        });
+
+        builder.Services.AddDbContext<Context>(options =>
+            options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"))
+                .EnableSensitiveDataLogging()
+                .LogTo(new DbContextToFileLogger().Log));
+            
+        var app = builder.Build();
+
+        if (!app.Environment.IsDevelopment())
+        {
+            app.UseExceptionHandler("/Error");
+            app.UseHsts();
+        }
+
+
+        app.UseHttpsRedirection();
+        app.UseStaticFiles();
+        app.UseRouting();
+        app.UseAuthorization();
+        app.MapRazorPages();
+
+        app.Run();
+    }
+}

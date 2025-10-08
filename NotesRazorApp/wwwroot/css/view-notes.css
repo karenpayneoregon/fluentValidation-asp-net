@@ -1,0 +1,54 @@
+﻿/* Apply to your table */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed; /* Ensures column widths are respected */
+}
+
+/* Column widths */
+th:nth-child(1),
+td:nth-child(1) { /* Note */
+    width: 30%;
+}
+
+th:nth-child(2),
+td:nth-child(2) { /* Due by */
+    width: 20%;
+    text-align: center;
+}
+
+th:nth-child(3),
+td:nth-child(3) { /* Done */
+    width: 10%;
+    text-align: center;
+}
+
+th:nth-child(4),
+td:nth-child(4) { /* Category */
+    width: 15%;
+}
+
+th:nth-child(5),
+td:nth-child(5) { /* Actions (Edit, View, Remove) */
+    width: 25%;
+    text-align: center;
+}
+
+/* General styling */
+th, td {
+    padding: 10px;
+    border-bottom: 1px solid #ccc;
+}
+
+th {
+    background-color: #e0f2f7;
+    font-weight: bold;
+}
+
+td {
+    background-color: #d7f0f7;
+}
+
+button {
+    margin: 0 2px;
+}
