@@ -7,6 +7,7 @@
 
 <link href="~/css/view-notes.css" rel="stylesheet" />
 
+
 <div class="container">
 
     <h1 class="text-primary mt-2 fs-4">Current notes</h1>
@@ -16,20 +17,20 @@
     </p>
 
 
-    <table class="table table-responsive table-info table-bordered table-striped" >
+    <table class="table table-responsive table-info table-bordered table-striped">
         <thead>
 
             <tr>
-                <th scope="col">
+                <th scope="col" class="text-start">
                     @Html.DisplayNameFor(model => model.Note[0].BodyText)
                 </th>
-                <th scope="col">
+                <th scope="col" class="text-start">
                     @Html.DisplayNameFor(model => model.Note[0].DueDate)
                 </th>
-                <th scope="col">
+                <th scope="col" class="text-center">
                     @Html.DisplayNameFor(model => model.Note[0].Completed)
                 </th>
-                <th  scope="col">
+                <th scope="col" class="text-start">
                     @Html.DisplayNameFor(model => model.Note[0].Category)
                 </th>
                 <th th scope="col"></th>
@@ -44,8 +45,9 @@
                     <td>
                         @Html.DisplayFor(modelItem => item.BodyText)
                     </td>
+  
                     <td>
-                        @item.DueDate?.ToString("MM/dd/yyyy hh:mm tt")
+                        @(item.DueDate.HasValue ? item.DueDate.Value.ToString("dd/MM/yyyy") : "")
                     </td>
 
                     <td>
@@ -63,11 +65,12 @@
 
                     <td>
                         @{
-                            @item.Category.CategoryName ;
+                            @item.Category.CategoryName
+                            ;
                         }
                     </td>
 
-                    <td>
+                    @*                     <td>
                         <div class="text-center">
                             <div aria-label="Basic example">
                                 <a asp-page="./EditNote" asp-route-id="@item.NoteId" class="btn btn-secondary btn-sm">Edit</a>
@@ -76,8 +79,31 @@
                             </div>
                         </div>
 
-                    </td>
+                    </td> *@
+                    <td>
+                        <div class="btn-group" role="group">
+                            <!-- View Button -->
+                            <a asp-page="./DetailNote" asp-route-id="@item.NoteId"
+                               class="btn btn-outline-primary btn-sm"
+                               title="View">
+                                <i class="bi bi-eye"></i>
+                            </a>
 
+                            <!-- Edit Button -->
+                            <a asp-page="./EditNote" asp-route-id="@item.NoteId"
+                               class="btn btn-outline-secondary btn-sm"
+                               title="Edit">
+                                <i class="bi bi-pencil-square"></i>
+                            </a>
+
+                            <!-- Delete Button -->
+                            <a asp-page="./RemoveNote" asp-route-id="@item.NoteId"
+                               class="btn btn-outline-danger btn-sm"
+                               title="Delete">
+                                <i class="bi bi-trash"></i>
+                            </a>
+                        </div>
+                    </td>
                 </tr>
             }
         </tbody>

@@ -18,7 +18,7 @@ public partial class Note
 
     [GreaterThan("11/1/2022")]
     [Display(Name = "Due by")]
-    [DisplayFormat(ApplyFormatInEditMode = false, DataFormatString = "{0:dd/MM/yyyy HH:mm tt}")]
+    [DisplayFormat(ApplyFormatInEditMode = false, DataFormatString = "{0:dd/MM/yyyy}")]
     public DateTime? DueDate { get; set; }
 
     [Required]
