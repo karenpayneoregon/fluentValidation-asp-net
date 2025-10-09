@@ -1,13 +1,14 @@
-﻿using System.IO;
-using System.Threading;
-using System.Threading.Tasks;
-// ReSharper disable InconsistentNaming
+﻿// ReSharper disable InconsistentNaming
 
 namespace NotesRazorApp.Classes
 {
     /// <summary>
-    /// DEV-ONLY DbContext file logger. Not for production.
+    /// Provides a mechanism for logging Entity Framework Core (EF Core) database context activities to a file.
     /// </summary>
+    /// <remarks>
+    /// This class is intended for development purposes only and should not be used in production environments.
+    /// It supports both asynchronous and synchronous logging of messages to a specified file.
+    /// </remarks>
     public class DbContextToFileLogger
     {
         private readonly string _fileName;

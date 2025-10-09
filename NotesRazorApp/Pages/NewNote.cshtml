@@ -11,7 +11,7 @@
 <hr />
 
 <div class="row">
-    <div class="col-md-4">
+    <div class="col-md-8">
         <form method="post">
             
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
@@ -36,7 +36,12 @@
 
             <div>
                 <label asp-for="Note.CategoryId">Category</label>
-                <select asp-for="Note.Category.CategoryId" class="form-select mb-2" asp-items="ViewBag.CategoryName" ></select>
+                <select asp-for="Note.Category.CategoryId"
+                        style="width: 200px"
+                        class="form-select mb-2"
+                        asp-items="ViewBag.CategoryName">
+
+                </select>
             </div>
 
             

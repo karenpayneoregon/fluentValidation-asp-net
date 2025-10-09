@@ -31,12 +31,6 @@ public class EditNoteModel(Context context, IValidator<Note> validator) : PageMo
 
         Note = note;
 
-        /*
-         * This is what default scaffolding provides which in the wild is no good so we
-         * switch to the category name as per the next line of code below.
-         */
-        //ViewData["CategoryId"] = new SelectList(_context.Category, "CategoryId", "CategoryId");
-
         SetupCategories();
 
         return Page();
@@ -54,19 +48,6 @@ public class EditNoteModel(Context context, IValidator<Note> validator) : PageMo
 
     public async Task<IActionResult> OnPostAsync(IFormCollection noteData)
     {
-
-
-        /*
-         * The following is easier done via Log.Information("Completed {P1}", Note.Completed);
-         * but let's look at another way to get at data
-         */
-        //DateTime dueDate = Convert.ToDateTime(Request.Form["Note.DueDate"]);
-        //StringValues completedValues = Request.Form["Note.Completed"];
-        //if (completedValues.Count >0)
-        //{
-        //    Log.Information("Check {P1}", completedValues[0]);
-        //}
-
 
         var result = await validator.ValidateAsync(Note);
         if (!result.IsValid)

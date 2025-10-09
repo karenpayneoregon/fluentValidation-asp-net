@@ -16,11 +16,20 @@ public partial class Context : DbContext
     public virtual DbSet<Category> Category { get; set; }
     public virtual DbSet<Note> Note { get; set; }
 
+    /// <summary>
+    /// Configures the database context options.
+    /// </summary>
+    /// <param name="optionsBuilder">The builder used to configure the database context options.</param>
+    /// <exception cref="Exception">Thrown when the database connection is not configured.</exception>
+    /// <remarks>
+    /// See Program.cs for configuration.
+    /// </remarks>
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
         if (!optionsBuilder.IsConfigured)
         {
-            ConnectionHelpers.StandardLoggingSqlServer(optionsBuilder);
+            // Use the ConnectionHelpers class to configure the database connection for desktop.
+            throw new Exception("Database connection is not configured.");
         }
     }
 

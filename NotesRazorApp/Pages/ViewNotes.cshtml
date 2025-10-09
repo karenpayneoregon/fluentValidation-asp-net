@@ -18,11 +18,15 @@
     else
     {
         <div class="list-group">
+            @{
+                int index = 0;
+            }
             @foreach (var item in Model.Note)
             {
+                index++;
                 <div class="list-group-item list-group-item-action flex-column align-items-start">
                     <div class="d-flex w-100 justify-content-between">
-                        <h5 class="mb-1">Note @item.NoteId</h5>
+                        <h5 class="mb-1">Note @index</h5>
                         @if (item.Completed)
                         {
                             <i class="bi-check" style="font-size: 1.5rem; color: green;"></i>
