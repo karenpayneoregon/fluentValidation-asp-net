@@ -55,5 +55,6 @@
 	<ItemGroup>
 	  <Folder Include="Article\Assets\" />
 	  <Folder Include="DataScrips\" />
+	  <Folder Include="Old\" />
 	</ItemGroup>
 </Project>

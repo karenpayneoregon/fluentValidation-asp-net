@@ -2,103 +2,70 @@
 @model NotesRazorApp.Pages.ViewNotesModel
 
 @{
-    ViewData["Title"] = "View notes";
+    ViewData["Title"] = "View Notes";
 }
 
-<link href="~/css/view-notes.css" rel="stylesheet" />
-
-
-<div class="container">
-
-    <h1 class="text-primary mt-2 fs-4">Current notes</h1>
-
-    <p>
+<div class="container mt-3">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h2 class="text-primary mb-0">Current Notes</h2>
         <a asp-page="NewNote" class="btn btn-success btn-sm">Create New</a>
-    </p>
+    </div>
 
-
-    <table class="table table-responsive table-info table-bordered table-striped">
-        <thead>
-
-            <tr>
-                <th scope="col" class="text-start">
-                    @Html.DisplayNameFor(model => model.Note[0].BodyText)
-                </th>
-                <th scope="col" class="text-start">
-                    @Html.DisplayNameFor(model => model.Note[0].DueDate)
-                </th>
-                <th scope="col" class="text-center">
-                    @Html.DisplayNameFor(model => model.Note[0].Completed)
-                </th>
-                <th scope="col" class="text-start">
-                    @Html.DisplayNameFor(model => model.Note[0].Category)
-                </th>
-                <th th scope="col"></th>
-            </tr>
-
-        </thead>
-
-        <tbody>
+    @if (Model.Note == null || !Model.Note.Any())
+    {
+        <div class="alert alert-info">No notes found.</div>
+    }
+    else
+    {
+        <div class="list-group">
             @foreach (var item in Model.Note)
             {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.BodyText)
-                    </td>
-  
-                    <td>
-                        @(item.DueDate.HasValue ? item.DueDate.Value.ToString("dd/MM/yyyy") : "")
-                    </td>
-
-                    <td>
-                        @{
-                            if (@item.Completed)
-                            {
-                                <i class="bi-check" style="font-size: 1.5rem; color: green;"></i>
-                            }
-                            else
-                            {
-                                <i class="bi-calendar" style="font-size: 1rem; color: darkred"></i>
-                            }
+                <div class="list-group-item list-group-item-action flex-column align-items-start">
+                    <div class="d-flex w-100 justify-content-between">
+                        <h5 class="mb-1">Note @item.NoteId</h5>
+                        @if (item.Completed)
+                        {
+                            <i class="bi-check" style="font-size: 1.5rem; color: green;"></i>
                         }
-                    </td>
-
-                    <td>
-                        @{
-                            @item.Category.CategoryName ;
+                        else
+                        {
+                            <i class="bi-calendar" style="font-size: 1rem; color: darkred"></i>
                         }
-                    </td>
+                    </div>
 
-                    <td>
-                        <div class="btn-group" role="group">
-                            <!-- View Button -->
-                            <a asp-page="./DetailNote" 
-                               asp-route-id="@item.NoteId"
-                               class="btn btn-outline-primary btn-sm"
-                               title="View">
-                                <i class="bi bi-eye"></i>
-                            </a>
+                    @if (item.Category != null && !string.IsNullOrWhiteSpace(item.Category.CategoryName))
+                    {
+                        <small class="text-muted d-block mb-1">@item.Category.CategoryName</small>
+                    }
 
-                            <!-- Edit Button -->
-                            <a asp-page="./EditNote" 
-                               asp-route-id="@item.NoteId"
-                               class="btn btn-outline-secondary btn-sm"
-                               title="Edit">
-                                <i class="bi bi-pencil-square"></i>
-                            </a>
+                    <p class="mb-1 text-break">@Html.DisplayFor(modelItem => item.BodyText)</p>
 
-                            <!-- Delete Button -->
-                            <a asp-page="./RemoveNote" 
-                               asp-route-id="@item.NoteId"
-                               class="btn btn-outline-danger btn-sm"
-                               title="Delete">
-                                <i class="bi bi-trash"></i>
-                            </a>
-                        </div>
-                    </td>
-                </tr>
+                    @if (item.DueDate.HasValue)
+                    {
+                        <small class="text-muted d-block mb-2">Due: @item.DueDate.Value.ToString("dd/MM/yyyy")</small>
+                    }
+
+                    <div class="d-flex gap-2 mt-2">
+                        <a asp-page="./DetailNote"
+                           asp-route-id="@item.NoteId"
+                           class="btn btn-outline-secondary btn-sm">
+                            View
+                        </a>
+
+                        <a asp-page="./EditNote"
+                           asp-route-id="@item.NoteId"
+                           class="btn btn-primary btn-sm">
+                            Edit
+                        </a>
+
+                        <a asp-page="./RemoveNote"
+                           asp-route-id="@item.NoteId"
+                           class="btn btn-outline-danger btn-sm">
+                            Remove
+                        </a>
+                    </div>
+                </div>
             }
-        </tbody>
-    </table>
+        </div>
+    }
 </div>
-

@@ -1,13 +1,15 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using FluentValidation;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using NotesRazorApp.Classes;
 using NotesRazorApp.Data;
 using NotesRazorApp.Models;
 
 namespace NotesRazorApp.Pages;
 
-public class EditNoteModel(Context context) : PageModel
+public class EditNoteModel(Context context, IValidator<Note> validator) : PageModel
 {
     [BindProperty]
     public Note Note { get; set; } = null!;
@@ -52,7 +54,7 @@ public class EditNoteModel(Context context) : PageModel
 
     public async Task<IActionResult> OnPostAsync(IFormCollection noteData)
     {
-       
+
 
         /*
          * The following is easier done via Log.Information("Completed {P1}", Note.Completed);
@@ -65,11 +67,12 @@ public class EditNoteModel(Context context) : PageModel
         //    Log.Information("Check {P1}", completedValues[0]);
         //}
 
-      
 
-        if (!ModelState.IsValid)
+        var result = await validator.ValidateAsync(Note);
+        if (!result.IsValid)
         {
             SetupCategories();
+            result.AddToModelState(ModelState, nameof(Note));
             return Page();
         }
 

@@ -1,12 +1,14 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using FluentValidation;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using NotesRazorApp.Classes;
 using NotesRazorApp.Data;
 using NotesRazorApp.Models;
 
 namespace NotesRazorApp.Pages;
 
-public class NewNoteModel(Context context) : PageModel
+public class NewNoteModel(Context context, IValidator<Note> validator) : PageModel
 {
     public IActionResult OnGet()
     {
@@ -16,10 +18,7 @@ public class NewNoteModel(Context context) : PageModel
             DueDate = DateTime.Now
         };
             
-        ViewData[nameof(Category.CategoryName)] = new SelectList(
-            context.Category.OrderBy(x => x.CategoryName).ToList(),
-            nameof(Note.CategoryId),
-            nameof(Note.Category.CategoryName));
+        SetupCategories();
 
         return Page();
 
@@ -31,8 +30,12 @@ public class NewNoteModel(Context context) : PageModel
     public async Task<IActionResult> OnPostAsync()
     {
 
-        if (!ModelState.IsValid)
+        var result = await validator.ValidateAsync(Note);
+        if (!result.IsValid)
         {
+            SetupCategories();
+            
+            result.AddToModelState(ModelState, nameof(Note));
             return Page();
         }
 
@@ -41,5 +44,13 @@ public class NewNoteModel(Context context) : PageModel
         await context.SaveChangesAsync();
 
         return RedirectToPage("ViewNotes");
+    }
+
+    private void SetupCategories()
+    {
+        ViewData[nameof(Category.CategoryName)] = new SelectList(
+            context.Category.OrderBy(x => x.CategoryName).ToList(),
+            nameof(Note.CategoryId),
+            nameof(Note.Category.CategoryName));
     }
 }
