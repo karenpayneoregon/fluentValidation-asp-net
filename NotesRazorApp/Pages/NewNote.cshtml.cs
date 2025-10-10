@@ -1,4 +1,6 @@
-﻿using FluentValidation;
+﻿using Azure.Core;
+using FluentValidation;
+using FluentValidation.Results;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -30,13 +32,16 @@ public class NewNoteModel(Context context, IValidator<Note> validator) : PageMod
     public async Task<IActionResult> OnPostAsync()
     {
 
-        var result = await validator.ValidateAsync(Note);
+        ValidationResult result = await validator.ValidateAsync(Note);
+       
         if (!result.IsValid)
         {
             SetupCategories();
             
             result.AddToModelState(ModelState, nameof(Note));
+            
             return Page();
+            
         }
 
         context.Note.Attach(Note);

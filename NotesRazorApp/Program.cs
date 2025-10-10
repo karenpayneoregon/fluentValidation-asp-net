@@ -18,6 +18,10 @@ public class Program
 
         builder.Services.AddRazorPages();
 
+
+        builder.Services.AddExceptionHandler<GlobalExceptionHandler>();
+        builder.Services.AddProblemDetails();
+        
         builder.Services.AddValidatorsFromAssemblyContaining<NoteValidator>();
 
         builder.Host.UseSerilog((context, configuration) =>
@@ -52,6 +56,9 @@ public class Program
         app.UseRouting();
         app.UseAuthorization();
         app.MapRazorPages();
+
+        // for GlobalExceptionHandler
+        app.UseExceptionHandler();
 
         app.Run();
     }
