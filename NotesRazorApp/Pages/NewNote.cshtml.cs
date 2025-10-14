@@ -19,8 +19,8 @@ public class NewNoteModel(Context context, IValidator<Note> validator) : PageMod
         {
             DueDate = DateTime.Now
         };
-            
-        SetupCategories();
+
+        ViewData[nameof(Category.CategoryName)] = CategorySelects.Create(context);
 
         return Page();
 
@@ -31,13 +31,15 @@ public class NewNoteModel(Context context, IValidator<Note> validator) : PageMod
 
     public async Task<IActionResult> OnPostAsync()
     {
-
+        //throw new Exception("Simulated crash!");
+        
         ValidationResult result = await validator.ValidateAsync(Note);
        
         if (!result.IsValid)
         {
-            SetupCategories();
             
+            ViewData[nameof(Category.CategoryName)] = CategorySelects.Create(context);
+
             result.AddToModelState(ModelState, nameof(Note));
             
             return Page();
@@ -51,11 +53,4 @@ public class NewNoteModel(Context context, IValidator<Note> validator) : PageMod
         return RedirectToPage("ViewNotes");
     }
 
-    private void SetupCategories()
-    {
-        ViewData[nameof(Category.CategoryName)] = new SelectList(
-            context.Category.OrderBy(x => x.CategoryName).ToList(),
-            nameof(Note.CategoryId),
-            nameof(Note.Category.CategoryName));
-    }
 }
