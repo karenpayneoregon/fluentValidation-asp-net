@@ -18,6 +18,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NotesRazorApp", "NotesRazor
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Experiments", "Experiments", "{8E1D1CCC-9289-C849-48CA-D7E099D02B6F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApplication1", "WebApplication1\WebApplication1.csproj", "{12F6A2FB-7F14-48EF-B2D9-28ECCC8BB565}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -36,6 +38,10 @@ Global
 		{F1BAE425-66F2-4755-E575-1F36A5028D21}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F1BAE425-66F2-4755-E575-1F36A5028D21}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F1BAE425-66F2-4755-E575-1F36A5028D21}.Release|Any CPU.Build.0 = Release|Any CPU
+		{12F6A2FB-7F14-48EF-B2D9-28ECCC8BB565}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{12F6A2FB-7F14-48EF-B2D9-28ECCC8BB565}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{12F6A2FB-7F14-48EF-B2D9-28ECCC8BB565}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{12F6A2FB-7F14-48EF-B2D9-28ECCC8BB565}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -43,6 +49,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{FF93F3B8-D614-31B7-6EDE-6E6DC25A71CC} = {19614708-6086-2479-ED40-DA81F689D590}
 		{5F10E602-48CC-A875-92E4-486D020BD41E} = {19614708-6086-2479-ED40-DA81F689D590}
+		{12F6A2FB-7F14-48EF-B2D9-28ECCC8BB565} = {8E1D1CCC-9289-C849-48CA-D7E099D02B6F}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {A6634203-63B2-46B6-A3C5-D38DDF98D9C4}

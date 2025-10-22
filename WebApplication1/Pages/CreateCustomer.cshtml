@@ -1,0 +1,81 @@
+﻿@page
+@model WebApplication1.Pages.CreateCustomerModel
+
+@{
+    ViewData["Title"] = "CreateCustomer";
+}
+
+<h1>CreateCustomer</h1>
+
+<h4>Customer</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="form-group mb-2">
+                <label asp-for="Customer.CompanyName" class="control-label">Company Name</label>
+                <input asp-for="Customer.CompanyName" class="form-control"/>
+                <span asp-validation-for="Customer.CompanyName" class="text-danger"></span>
+            </div>
+            
+
+            <div class="form-group mb-2">
+                <label asp-for="Customer.ContactId" class="control-label">Contact</label>
+                <select asp-for="Customer.ContactId" class="form-control" asp-items="ViewBag.ContactId"></select>
+            </div>
+
+
+            <div class="form-group mb-2">
+                <label asp-for="Customer.Street" class="control-label">Street</label>
+                <input asp-for="Customer.Street" class="form-control"/>
+                <span asp-validation-for="Customer.Street" class="text-danger"></span>
+            </div>
+
+            <div class="form-group mb-2">
+                <label asp-for="Customer.City" class="control-label">City</label>
+                <input asp-for="Customer.City" class="form-control"/>
+                <span asp-validation-for="Customer.City" class="text-danger"></span>
+            </div>
+
+            <div class="form-group mb-2">
+                <label asp-for="Customer.PostalCode" class="control-label">Postal code</label>
+                <input asp-for="Customer.PostalCode" class="form-control"/>
+                <span asp-validation-for="Customer.PostalCode" class="text-danger"></span>
+            </div>
+
+            <div class="form-group mb-2">
+                <label asp-for="Customer.CountryIdentifier" class="control-label">Country</label>
+                <select asp-for="Customer.CountryIdentifier" class="form-control" asp-items="ViewBag.CountryIdentifier"></select>
+            </div>
+
+            <div class="form-group mb-2">
+                <label asp-for="Customer.Phone" class="control-label">Phone</label>
+                <input asp-for="Customer.Phone" class="form-control"/>
+                <span asp-validation-for="Customer.Phone" class="text-danger"></span>
+            </div>
+
+            <div class="form-group mb-2">
+                <label asp-for="Customer.ContactTypeIdentifier" class="control-label">Contact Type</label>
+                <select asp-for="Customer.ContactTypeIdentifier" class="form-control" asp-items="ViewBag.ContactTypeIdentifier"></select>
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary"/>
+            </div>
+
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
