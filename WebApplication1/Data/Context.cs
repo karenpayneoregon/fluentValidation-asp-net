@@ -9,43 +9,26 @@ namespace WebApplication1.Data;
 
 public partial class Context : DbContext
 {
-
-
     public Context(DbContextOptions<Context> options)
         : base(options)
     {
     }
 
     public virtual DbSet<Category> Categories { get; set; }
-
     public virtual DbSet<Contact> Contacts { get; set; }
-
     public virtual DbSet<ContactDevice> ContactDevices { get; set; }
-
     public virtual DbSet<ContactType> ContactTypes { get; set; }
-
     public virtual DbSet<Country> Countries { get; set; }
-
     public virtual DbSet<Customer> Customers { get; set; }
-
     public virtual DbSet<Employee> Employees { get; set; }
-
     public virtual DbSet<Order> Orders { get; set; }
-
     public virtual DbSet<OrderDetail> OrderDetails { get; set; }
-
     public virtual DbSet<PhoneType> PhoneTypes { get; set; }
-
     public virtual DbSet<Product> Products { get; set; }
-
     public virtual DbSet<Region> Regions { get; set; }
-
     public virtual DbSet<Shipper> Shippers { get; set; }
-
     public virtual DbSet<Supplier> Suppliers { get; set; }
-
     public virtual DbSet<SupplierRegion> SupplierRegions { get; set; }
-
     public virtual DbSet<Territory> Territories { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -133,10 +116,12 @@ public partial class Context : DbContext
             entity.Property(e => e.CityPostal)
                 .HasMaxLength(26)
                 .HasComputedColumnSql("(([City]+' ')+[PostalCode])", false);
+            
             entity.Property(e => e.CompanyName)
                 .IsRequired()
                 .HasMaxLength(40)
                 .HasComment("Company");
+            
             entity.Property(e => e.Fax).HasMaxLength(24);
             entity.Property(e => e.ModifiedDate).HasDefaultValueSql("(getdate())");
             entity.Property(e => e.Phone).HasMaxLength(24);
@@ -173,11 +158,13 @@ public partial class Context : DbContext
             entity.Property(e => e.FirstName)
                 .IsRequired()
                 .HasMaxLength(10);
+            
             entity.Property(e => e.HireDate).HasColumnType("datetime");
             entity.Property(e => e.HomePhone).HasMaxLength(24);
             entity.Property(e => e.LastName)
                 .IsRequired()
                 .HasMaxLength(20);
+            
             entity.Property(e => e.PostalCode).HasMaxLength(10);
             entity.Property(e => e.Region).HasMaxLength(15);
             entity.Property(e => e.ReportsToNavigationEmployeeId).HasColumnName("ReportsToNavigationEmployeeID");
@@ -285,6 +272,7 @@ public partial class Context : DbContext
             entity.Property(e => e.ProductName)
                 .IsRequired()
                 .HasMaxLength(40);
+            
             entity.Property(e => e.QuantityPerUnit).HasMaxLength(20);
             entity.Property(e => e.SupplierId).HasColumnName("SupplierID");
             entity.Property(e => e.UnitPrice).HasColumnType("money");
@@ -307,6 +295,7 @@ public partial class Context : DbContext
             entity.Property(e => e.RegionId)
                 .ValueGeneratedNever()
                 .HasColumnName("RegionID");
+            
             entity.Property(e => e.RegionDescription)
                 .IsRequired()
                 .HasMaxLength(50)
@@ -333,6 +322,7 @@ public partial class Context : DbContext
             entity.Property(e => e.CompanyName)
                 .IsRequired()
                 .HasMaxLength(40);
+            
             entity.Property(e => e.ContactName).HasMaxLength(30);
             entity.Property(e => e.ContactTitle).HasMaxLength(30);
             entity.Property(e => e.Fax).HasMaxLength(24);
@@ -368,6 +358,7 @@ public partial class Context : DbContext
             entity.Property(e => e.TerritoryId)
                 .HasMaxLength(20)
                 .HasColumnName("TerritoryID");
+            
             entity.Property(e => e.RegionId).HasColumnName("RegionID");
             entity.Property(e => e.TerritoryDescription)
                 .IsRequired()
