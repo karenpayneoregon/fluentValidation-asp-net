@@ -29,3 +29,9 @@ body {
 .form-floating > .form-control-plaintext:focus::placeholder, .form-floating > .form-control:focus::placeholder {
   text-align: start;
 }
+
+
+.validation-error {
+    font-weight: bold;
+    color: #dc3545; /* Bootstrap red */
+}
