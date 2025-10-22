@@ -16,7 +16,6 @@ public class PageHelpers
     /// A <see cref="string"/> representing the name of the current page. 
     /// Returns "Index" if the request path is the root ("/"), otherwise returns the file name without its extension.
     /// </returns>
-    /// <exception cref="ArgumentNullException">Thrown if <paramref name="request"/> is <see langword="null"/>.</exception>
     public static string GetCurrentPageName(HttpRequest request)
     {
         string path = request.Path;

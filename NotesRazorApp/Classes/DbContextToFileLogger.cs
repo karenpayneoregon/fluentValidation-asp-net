@@ -1,5 +1,6 @@
 ﻿// ReSharper disable InconsistentNaming
 
+// ReSharper disable MethodSupportsCancellation
 namespace NotesRazorApp.Classes
 {
     /// <summary>
