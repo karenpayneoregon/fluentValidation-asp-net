@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System.ComponentModel.DataAnnotations;
+using Serilog;
 using WebApplication1.Classes;
 using WebApplication1.Data;
 using WebApplication1.Models;
@@ -49,6 +50,8 @@ namespace WebApplication1.Pages
             //_context.Customers.Add(Customer);
             //await _context.SaveChangesAsync();
 
+            Log.Information("Customer created successfully {@Customer}", Customer);
+            
             return RedirectToPage("./Index");
         }
 

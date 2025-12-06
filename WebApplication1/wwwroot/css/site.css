@@ -33,5 +33,13 @@ body {
 
 .validation-error {
     font-weight: bold;
-    color: #dc3545; /* Bootstrap red */
+    color: crimson; 
 }
+
+
+.field-validation-error {
+    font-weight: bold;
+    color: crimson !important;
+}
+
+
