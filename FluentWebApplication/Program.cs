@@ -24,15 +24,22 @@ public class Program
         builder.Services.AddValidatorsFromAssemblyContaining<PersonValidator>();
 
         // colorize output
-        builder.Host.UseSerilog(( _, configuration) =>
+        builder.Host.UseSerilog((_, configuration) =>
             configuration.WriteTo.Console(theme: AnsiConsoleTheme.Code));
 
+        if (builder.Environment.IsDevelopment())
+        {
+            builder.Services.AddDbContextPool<Context>(options =>
+                options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"))
+                    .EnableSensitiveDataLogging()
+                    .LogTo(new DbContextToFileLogger().Log, [DbLoggerCategory.Database.Command.Name],
+                        LogLevel.Information));
+        }else
+        {
+            builder.Services.AddDbContextPool<Context>(options =>
+                options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+        }
 
-        builder.Services.AddDbContextPool<Context>(options =>
-            options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"))
-                .EnableSensitiveDataLogging()
-                .LogTo(message => 
-                    Debug.WriteLine(message), LogLevel.Information,null));
 
         builder.Services.AddHostedService<EfCoreWarmupService>();
 

@@ -8,10 +8,10 @@ namespace FluentWebApplication.Models;
 public partial class Person
 {
     public int PersonId { get; set; }
-    [Display(Name = "First")]
+    //[Display(Name = "First")]
     public string FirstName { get; set; }
-    [Display(Name = "Last")]
+    //[Display(Name = "Last")]
     public string LastName { get; set; }
-    [Display(Name = "Email")]
+    //[Display(Name = "Email")]
     public string EmailAddress { get; set; }
 }
