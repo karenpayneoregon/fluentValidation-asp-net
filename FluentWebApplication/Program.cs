@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using Serilog;
 using Serilog.Sinks.SystemConsole.Themes;
 using System.Diagnostics;
+using FluentWebApplication.Models.Configuration;
 
 namespace FluentWebApplication;
 
@@ -23,12 +24,13 @@ public class Program
 
         builder.Services.AddValidatorsFromAssemblyContaining<PersonValidator>();
 
-        // colorize output
-        builder.Host.UseSerilog((_, configuration) =>
-            configuration.WriteTo.Console(theme: AnsiConsoleTheme.Code));
 
         if (builder.Environment.IsDevelopment())
         {
+            // colorize output
+            builder.Host.UseSerilog((_, configuration) =>
+                configuration.WriteTo.Console(theme: AnsiConsoleTheme.Code));
+            
             builder.Services.AddDbContextPool<Context>(options =>
                 options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"))
                     .EnableSensitiveDataLogging()
@@ -39,10 +41,15 @@ public class Program
             builder.Services.AddDbContextPool<Context>(options =>
                 options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
         }
+        
+        builder.Services
+            .AddOptions<UseCancellationTokenTimedSettings>()
+            .Bind(builder.Configuration.GetSection(UseCancellationTokenTimedSettings.SectionName))
+            .Validate(s => s.Timeout >= 0, "Timeout must be >= 0")
+            .ValidateOnStart();
 
-
-        builder.Services.AddHostedService<EfCoreWarmupService>();
-
+        builder.Services.AddHostedService<EntityCoreWarmupService>();
+        
         var app = builder.Build();
 
         // Configure the HTTP request pipeline.

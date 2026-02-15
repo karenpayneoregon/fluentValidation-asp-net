@@ -3,7 +3,16 @@
 Basic `FluentValidation` Razor pages example
 
 > **Note**
+> 02/14/2026 added MockedData to load data and removed HasData from the DbContext.
+
+> **Note**
 > 11/2025 refactored away from `FluentValidation.AspNetCore` package
+
+
+## Database
+
+- Create (localdb)\\MSSQLLocalDB;Initial Catalog=FluentValidation1
+- Populate using DatabaseScripts\Populate.sql
 
 ## Packages
 

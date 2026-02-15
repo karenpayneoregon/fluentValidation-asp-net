@@ -2,8 +2,10 @@
 #nullable disable
 using System;
 using System.Collections.Generic;
+using FluentWebApplication.Classes;
 using FluentWebApplication.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Conventions;
 
 namespace FluentWebApplication.Data;
 
@@ -29,23 +31,8 @@ public partial class Context : DbContext
             entity.Property(e => e.LastName).IsRequired();
         });
 
-        modelBuilder.Entity<Person>().HasData(
-            new Person()
-            {
-                PersonId = 1,
-                FirstName = "Karen",
-                LastName = "Payne",
-                EmailAddress = "payne@comcast.net"
-            },
-            new Person()
-            {
-                PersonId = 2,
-                FirstName = "Bob",
-                LastName = "Smith",
-                EmailAddress = "BillyBob@bear.com"
-            }
-        );
-
+        //modelBuilder.Entity<Person>().HasData(MockedData.People);
+            
         OnModelCreatingPartial(modelBuilder);
     }
 

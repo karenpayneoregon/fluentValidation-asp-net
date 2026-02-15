@@ -1,17 +1,30 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using FluentWebApplication.Data;
+using FluentWebApplication.Models;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace FluentWebApplication.Pages;
-public class IndexModel : PageModel
+public class IndexModel(Context context) : PageModel
 {
 
 
-    public IndexModel()
-    {
-    }
+
 
     public void OnGet()
     {
 
+    }
+
+    private void UpdateEmailAddresses()
+    {
+        var people = context.Person.ToList();
+        foreach (var (index, person) in people.Index())
+        {
+            person.EmailAddress = index % 2 == 0 ? 
+                $"{person.LastName}{person.FirstName}@gmail.com" : 
+                $"{person.FirstName}{person.LastName}@yahoo.com";
+        }
+
+        var count = context.SaveChanges();
     }
 }
