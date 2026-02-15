@@ -8,9 +8,9 @@
 /// <see cref="SectionName"/> section. It provides properties to control whether a cancellation token is used
 /// and to specify the timeout duration.
 /// </remarks>
-public sealed class UseCancellationTokenTimedSettings
+public sealed class CancellationTokenSettings
 {
-    public const string SectionName = "UseCancellationTokenTimed";
+    public const string SectionName = "CancellationTokenSettings";
 
     public bool Use { get; init; }
     public int Timeout { get; init; } // milliseconds

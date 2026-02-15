@@ -18,7 +18,7 @@ public sealed class AppConfiguration
     /// </value>
     /// <remarks>
     /// This property is initialized based on the configuration settings defined in the 
-    /// <c>appsettings.json</c> file under the <see cref="UseCancellationTokenTimedSettings.SectionName"/> section.
+    /// <c>appsettings.json</c> file under the <see cref="CancellationTokenSettings.SectionName"/> section.
     /// </remarks>
     public bool Use { get; }
 
@@ -40,10 +40,10 @@ public sealed class AppConfiguration
     /// <remarks>
     /// This constructor is private to enforce the singleton pattern. It reads configuration settings
     /// from the "appsettings.json" file and initializes the <see cref="Enabled"/> and <see cref="Timeout"/> properties
-    /// based on the <see cref="UseCancellationTokenTimedSettings"/> section.
+    /// based on the <see cref="CancellationTokenSettings"/> section.
     /// </remarks>
     /// <exception cref="InvalidOperationException">
-    /// Thrown if the configuration section <see cref="UseCancellationTokenTimedSettings.SectionName"/> is missing or invalid.
+    /// Thrown if the configuration section <see cref="CancellationTokenSettings.SectionName"/> is missing or invalid.
     /// </exception>
     private AppConfiguration()
     {
@@ -53,8 +53,8 @@ public sealed class AppConfiguration
             .Build();
 
         var settings = configuration
-                           .GetSection(UseCancellationTokenTimedSettings.SectionName)
-                           .Get<UseCancellationTokenTimedSettings>();
+                           .GetSection(CancellationTokenSettings.SectionName)
+                           .Get<CancellationTokenSettings>();
 
         Use = settings!.Use;
         Timeout = settings.Timeout;

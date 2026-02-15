@@ -43,8 +43,8 @@ public class Program
         }
         
         builder.Services
-            .AddOptions<UseCancellationTokenTimedSettings>()
-            .Bind(builder.Configuration.GetSection(UseCancellationTokenTimedSettings.SectionName))
+            .AddOptions<CancellationTokenSettings>()
+            .Bind(builder.Configuration.GetSection(CancellationTokenSettings.SectionName))
             .Validate(s => s.Timeout >= 0, "Timeout must be >= 0")
             .ValidateOnStart();
 
