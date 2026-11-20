@@ -5,6 +5,14 @@ using FluentValidation;
 namespace WebApplication1.Validators;
 
 
+/// <summary>
+/// Provides validation rules for the <see cref="WebApplication1.Models.Customer"/> model.
+/// </summary>
+/// <remarks>
+/// This validator defines rules for adding, editing, and deleting customers.
+/// It ensures that required fields are populated, values meet specific constraints,
+/// and relationships between fields are valid.
+/// </remarks>
 public class CustomerValidator : AbstractValidator<Customer>
 {
     public CustomerValidator()
