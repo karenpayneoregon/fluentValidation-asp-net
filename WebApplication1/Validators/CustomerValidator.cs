@@ -15,6 +15,27 @@ namespace WebApplication1.Validators;
 /// </remarks>
 public class CustomerValidator : AbstractValidator<Customer>
 {
+    /// <summary>
+    /// Initializes a new instance of the <see cref="CustomerValidator"/> class.
+    /// </summary>
+    /// <remarks>
+    /// This constructor defines validation rules for the <see cref="WebApplication1.Models.Customer"/> model.
+    /// It includes rule sets for adding, editing, and deleting customers:
+    /// <list type="bullet">
+    /// <item>
+    /// <term>Add</term>
+    /// <description>Validates required fields, length constraints, and specific formats for adding a customer.</description>
+    /// </item>
+    /// <item>
+    /// <term>Edit</term>
+    /// <description>Includes base validation rules for editing a customer.</description>
+    /// </item>
+    /// <item>
+    /// <term>Delete</term>
+    /// <description>Ensures a valid customer identifier is provided for deletion.</description>
+    /// </item>
+    /// </list>
+    /// </remarks>
     public CustomerValidator()
     {
         // ----------- Add -----------
